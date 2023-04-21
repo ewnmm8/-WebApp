@@ -38,7 +38,7 @@ const startOnclick = () => {
 const restartOnclick = () => {
    isWork.value = false
    time.value = -1
-   pomodoro.value++
+   if (isWork.value) pomodoro.value++
    startTime()
 }
 
@@ -46,7 +46,7 @@ const audio1Onended = () => {
    audio2.value.play()
 }
 const audio2Onended = () => {
-   if (!isWork.value) {
+   if (isWork.value) {
       pomodoro.value++
    }
    startTime()
