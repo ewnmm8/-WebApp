@@ -38,7 +38,7 @@ const startOnclick = () => {
 const restartOnclick = () => {
    isWork.value = false
    time.value = -1
-   if (isWork.value) pomodoro.value++
+   if (!isWork.value) pomodoro.value++
    startTime()
 }
 
