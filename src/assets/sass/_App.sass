@@ -1,19 +1,46 @@
-body
+*
     font-family: Arial, Helvetica, sans-serif
-    font-size: 18px
+    font-size: 36px
+    line-height: 1em
+    padding: 0
+    border: 0
+    margin: 0
 
 #app
+    position: relative
     display: flex
     flex-direction: column
-    overflow: hidden
+    justify-content: space-around
+    align-items: center
     width: 100vw
-    min-width: calc(100vh * (16 / 9))
     height: 100vh
-    margin: 0
-    div
-        margin: auto
-        div
-            margin: 1rem auto
 
-#btn button:first-child
-    margin-right: 6px
+#Time
+    font-size: 4em
+
+button
+    background-color: #fff
+    border: solid 1px #bbb
+    border-radius: 3px
+    &:hover:not(:disabled)
+        background-color: #eee
+    &:active:not(:disabled)
+        background-color: #ccc
+    img
+        width: 4em
+        height: 4em
+
+#History
+    span
+        &:last-of-type:not(:first-of-type)
+            background-color: #76f
+        &:nth-of-type(8n)
+            background-color: #f11 !important
+
+#window
+    position: absolute
+    display: flex
+    flex-direction: column
+    input
+        border: solid 1px black
+        margin: 2px
