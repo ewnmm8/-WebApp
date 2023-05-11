@@ -5,5 +5,5 @@ const props = defineProps({
 </script>
 
 <template>
-<button><img :src='src'></button>
+<div></div>
 </template>

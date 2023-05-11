@@ -1,46 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap')
+
 *
-    font-family: Arial, Helvetica, sans-serif
-    font-size: 36px
+    font-family: 'Inter', Arial, Helvetica, sans-serif
+    font-size: 18px
     line-height: 1em
     padding: 0
     border: 0
     margin: 0
+    text-align: center
 
 #app
     position: relative
     display: flex
-    flex-direction: column
-    justify-content: space-around
+    justify-content: space-evenly
     align-items: center
     width: 100vw
     height: 100vh
 
-#Time
-    font-size: 4em
-
-button
-    background-color: #fff
-    border: solid 1px #bbb
-    border-radius: 3px
-    &:hover:not(:disabled)
-        background-color: #eee
-    &:active:not(:disabled)
-        background-color: #ccc
-    img
-        width: 4em
-        height: 4em
-
-#History
-    span
-        &:last-of-type:not(:first-of-type)
-            background-color: #76f
-        &:nth-of-type(8n)
-            background-color: #f11 !important
-
-#window
-    position: absolute
+#time
+    font-size: 3.1rem
     display: flex
-    flex-direction: column
-    input
-        border: solid 1px black
-        margin: 2px
+    justify-content: center
+    align-items: center
+    &:hover
+        background-color: #EEE
+    &:active
+        background-color: #E5E5E5
+    div
+        font-size: inherit
+        display: inline-block
+        &:nth-of-type(1)
+            width: 1.3em
+            text-align: right
+        &:nth-of-type(3)
+            width: 1.3em
+            text-align: left
+
+.btn
+    display: flex
+    justify-content: center
+    align-items: center
+    color: white
+    width: 2.3em
+    height: 2.3rem
+    border-radius: 13px
+    &.blue
+        background-color: #00A
+        &:hover
+            background-color: #00C
+        &:active, &:disabled
+            background-color: #00F
+    &.red
+        background-color: #A00
+        &:hover
+            background-color: #C00
+        &:active, &:disabled
+            background-color: #F00

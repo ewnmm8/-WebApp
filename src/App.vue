@@ -1,60 +1,46 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { audioPlay } from './components/Audio'
-import { formatMin, numToSec, numToMin, formatSpan } from './components/func'
-import PlayPng from './assets/img/Play.png'
-import PausePng from './assets/img/Pause.png'
-import NextPng from './assets/img/Next.png'
-import Button from './components/Button.vue'
+import { sec, min } from './components/func'
 
-const time_work = ref(25)
-const time_rest = ref(5)
-const time = ref(formatMin(time_work.value))
+const time = ref(0)
+const work_count = ref(0)
+const rest_count = ref(0)
+const is_work = ref(false)
+const is_play = ref(false)
+
 setInterval(() => {
-   if (time.value > 0 && isPlay.value) time.value -= 1
+   if (is_play.value) time.value -= 1
 }, 1000)
-
-const isWork = ref(true)
-const isPlay = ref(false)
-const isWondowHidden = ref(true)
-const history = ref()
-const char = {
-   true: "🔥",
-   false: "😪"
-}
-const setTIme= () => {
-   if (isWork.value) {
-      time.value = formatMin(time_work.value)
-   }
-   else {
-      time.value = formatMin(time_rest.value)
-   }
-   history.value.innerHTML += formatSpan(char[isWork.value])
-}
-
-watch(time, time => {
-   if (time === 0) {
+watch(time, () => {
+   if (time.value === 0) {
       audioPlay(() => {
-         isWork.value = !isWork.value
+         if (time.value <= 0) {
+            is_work.value = !is_work.value
+         }
       })
    }
 })
-watch(isWork, setTIme)
-onMounted(() => {
-   history.value.innerHTML = formatSpan(char[true])
+watch(is_work, () => {
+   if (is_work.value) {
+      work_count.value++
+      time.value = 25*60
+   }
+   else {
+      rest_count.value++
+      time.value = 5*60
+   }
 })
+
+is_work.value = true
 </script>
 
 <template>
-   <div id="window" :style="isWondowHidden ? 'display: none;' : ''">
-      <input v-model="time_work" placeholder="work">
-      <input v-model="time_rest" placeholder="rest">
+   <button class="btn blue" :disabled="!is_work" @click="() => {is_work = !is_work}">{{ rest_count }}</button>
+   <div id="time" @click="() => {is_play = !is_play}">
+      <div>{{ min(time) }}</div>
+      <div>:</div>
+      <div>{{ sec(time) }}</div>
    </div>
-   <div id="Time" @click="isWondowHidden = !isWondowHidden">{{ numToMin(time) }}:{{ numToSec(time) }}</div>
-   <div id="History" ref="history"><span></span></div>
-   <div>
-      <Button :src="PausePng" @click="() => {isPlay = !isPlay}" v-if="isPlay" />
-      <Button :src="PlayPng" @click="() => {isPlay = !isPlay}" v-else />
-      <Button :src="NextPng" @click="() => {isWork = !isWork}" />
-   </div>
+   <button class="btn red" :disabled="is_work" @click="() => {is_work = !is_work}">{{ work_count }}</button>
 </template>

@@ -1,16 +1,21 @@
-export function formatMin(min) {
-   console.log(min)
-   let num = Math.round(min * 60)
+function toUnsignedInt(num) {
+   num = Math.round(num)
    if (num < 0) num = 0
    return num
 }
 
-export function numToSec(time) {
-   return ('0' + (time % 60)).slice(-2)
+function formatInt(num) {
+   return ('0' + num).slice(-2)
 }
 
-export function numToMin(time) {
-   return (time - numToSec(time)) / 60
+export function sec(time) {
+   time = toUnsignedInt(time)
+   return formatInt(time % 60)
+}
+
+export function min(time) {
+   time = toUnsignedInt(time)
+   return formatInt((time - time % 60) / 60)
 }
 
 export function formatSpan(char) {
